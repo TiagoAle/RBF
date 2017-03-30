@@ -17,7 +17,7 @@ Y1 = sin(2*X);
 Y1 = Y1';
 
 % Adicionando Rúido ao seno
-nValue = 0.3;
+nValue = 0.1;
 noise = nValue*randn(1, length(Y1)) - nValue/2;
 Y2 = Y1 + noise;
 Y2 = Y2';
@@ -136,14 +136,13 @@ hold on;
 plot(train,saidaTR, 'b*');
 hold off;
 
-%redimensionando o vetor X para um vetor H de outra dimensão
+%
 H1 = [];
 for i = 1 : length(test)
     h = exp(-1/2*(repmat(test(i,:), length(c), 1) - c).^2/bestFold(2).^2);
     H1 = [H1; h'];
 end
 
-%adicionando o bias e calculando a saída do teste
 bias = repmat(-1,length(H1),1);
 H1 = [bias H1];
 Y = W'*H1';
